@@ -1,68 +1,35 @@
 package edu.epam.car.service;
 
-import edu.epam.car.entity.vehicle.Vehicle;
+import edu.epam.car.entity.Car;
+import edu.epam.car.entity.CarsShop;
+import edu.epam.car.model.Brand;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class CarService {
 
-    private List<Vehicle> vehicleList;
+    public List<Car> findCarByBrand(CarsShop carShop, Brand carBrand) {
+        List<Car> carsByBrandList = carShop.getCarList();
 
-    public CarService() {
-        this.vehicleList = new ArrayList<>();
+        return carsByBrandList.stream()
+                .filter(brand -> brand.getBrand().equals(carBrand))
+                .collect(Collectors.toList());
     }
 
-    public void addVehicle(Vehicle vehicle) {
-        vehicleList.add(vehicle);
+    public List<Car> findCarByModelAndExploitation(CarsShop carShop, String carModel, int carExploitation) {
+        List<Car> carsByModelOperationList = carShop.getCarList();
+
+        return carsByModelOperationList.stream()
+                .filter(model -> model.getModel().equals(carModel))
+                .filter(exploitation -> exploitation.getExploitation() > carExploitation)
+                .collect(Collectors.toList());
     }
 
+    public List<Car> findCarByYearAndPrice(CarsShop carShop, int year, double price) {
+        List<Car> carsByYearAndPriceList = carShop.getCarList();
 
-    //To find list of cars of given brand
-    public List<Vehicle> findBrand(String brand) {
-        List<Vehicle> brandList = new ArrayList<>();
-
-        for (Vehicle car : vehicleList) {
-            if (car.getBrand().equals(brand)) {
-                brandList.add(car);
-            }
-        }
-        return brandList;
-    }
-
-    //To find list of cars of given model and operation more than given
-    public List<Vehicle> findModelExploitation(String model, int operation) {
-        List<Vehicle> exploitationList = new ArrayList<>();
-
-        for (Vehicle car : vehicleList) {
-            if (car.getModel().equals(model) && car.getExploitation() > operation) {
-                exploitationList.add(car);
-            }
-        }
-        return exploitationList;
-    }
-
-    //To find list of cars of given year and price more than given
-    public List<Vehicle> findYearPrice(int release, int price) {
-        List<Vehicle> carsYearPriceList = new ArrayList<>();
-
-        for (Vehicle car : vehicleList) {
-            if (car.getReleaseYear() == release && car.getPrice() > price) {
-                carsYearPriceList.add(car);
-            }
-        }
-        return carsYearPriceList;
-    }
-
-    //To find list of cars of given color
-    public List<Vehicle> findColor(String color) {
-        List<Vehicle> colorList = new ArrayList<>();
-
-        for (Vehicle car : vehicleList) {
-            if (car.getColor().equals(color)) {
-                colorList.add(car);
-            }
-        }
-        return colorList;
+        return carsByYearAndPriceList.stream().filter(result -> result.getRealiseYear() == year
+                && result.getPrice() > price).collect(Collectors.toList());
     }
 }

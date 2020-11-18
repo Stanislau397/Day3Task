@@ -1,47 +1,30 @@
 package edu.epam.car.report;
 
-import edu.epam.car.entity.vehicle.Vehicle;
-import edu.epam.car.service.CarService;
+import edu.epam.car.entity.Car;
+import edu.epam.car.entity.CarsShop;
+import org.apache.log4j.Level;
+import org.apache.log4j.Logger;
 
 import java.util.List;
 
 public class CarReport {
 
-    public void printCarBrand(CarService cars, String brand) {
-        List<Vehicle> brandList = cars.findBrand(brand);
-        System.out.println("List of cars of " + brand + " brand:");
+    private static final Logger logger = Logger.getLogger(CarReport.class.getName());
 
-        for (Vehicle car : brandList) {
-            System.out.println(car.toString());
-        }
+    public void printCarsByBrand(CarsShop shop, List<Car> carsByBrand, String brand) {
+        logger.log(Level.INFO, "List of cars of " + brand);
+        carsByBrand.forEach(logger::info);
     }
 
-    public void printCarModelExploitation(CarService cars, String model, int year) {
-        List<Vehicle> exploitationList = cars.findModelExploitation(model, year);
-        System.out.println("\nList of cars of " + model + " model " +
-                " that have been in operation more than " + year + " years");
-
-        for (Vehicle car : exploitationList) {
-            System.out.println(car.toString());
-        }
+    public void printCarsByModelAndExploitation(CarsShop shop, List<Car> carsByModelExploitation, String model, int exploitation) {
+        logger.log(Level.INFO, "List of cars " + model + " in exploitation more than " +
+                exploitation + " years");
+        carsByModelExploitation.forEach(logger::info);
     }
 
-    public void printCarYearPrice(CarService cars, int release, int price) {
-        List<Vehicle> yearPriceList = cars.findYearPrice(release, price);
-        System.out.println("\nList of cars of year + " + release + " release " +
-                " the price of which is higher than " + price + "$");
-
-        for (Vehicle car : yearPriceList) {
-            System.out.println(car.toString());
-        }
-    }
-
-    public void printCarsGivenColor(CarService cars, String color) {
-        List<Vehicle> colorList = cars.findColor(color);
-        System.out.println("\nList of cars of " + color + " color:");
-
-        for (Vehicle car : colorList) {
-            System.out.println(car.toString());
-        }
+    public void printCarsByYearAndPrice(CarsShop carShop, List<Car> carsByYearPrice, int year, double price) {
+        logger.log(Level.INFO, "List of cars of " + year + " year " +
+                " the price of which higher than " + price + "$");
+        carsByYearPrice.forEach(logger::info);
     }
 }
