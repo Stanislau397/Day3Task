@@ -63,7 +63,30 @@ public class CarsShop {
         this.carList = carList;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof CarsShop)) return false;
 
+        CarsShop carsShop = (CarsShop) o;
+
+        if (id != carsShop.id) return false;
+        if (shopName != null ? !shopName.equals(carsShop.shopName) : carsShop.shopName != null) return false;
+        if (phoneNumber != null ? !phoneNumber.equals(carsShop.phoneNumber) : carsShop.phoneNumber != null)
+            return false;
+        if (address != null ? !address.equals(carsShop.address) : carsShop.address != null) return false;
+        return carList != null ? carList.equals(carsShop.carList) : carsShop.carList == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = shopName != null ? shopName.hashCode() : 0;
+        result = 31 * result + id;
+        result = 31 * result + (phoneNumber != null ? phoneNumber.hashCode() : 0);
+        result = 31 * result + (address != null ? address.hashCode() : 0);
+        result = 31 * result + (carList != null ? carList.hashCode() : 0);
+        return result;
+    }
 
     @Override
     public String toString() {
