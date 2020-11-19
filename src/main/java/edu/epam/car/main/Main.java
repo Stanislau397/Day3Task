@@ -1,8 +1,8 @@
 package edu.epam.car.main;
 
 import edu.epam.car.model.Brand;
-import edu.epam.car.entity.Car;
-import edu.epam.car.entity.CarsShop;
+import edu.epam.car.model.Car;
+import edu.epam.car.model.CarsShop;
 import edu.epam.car.report.CarReport;
 import edu.epam.car.service.CarService;
 
@@ -12,7 +12,7 @@ import java.util.List;
 public class Main {
 
     public static void main(String[] args) {
-        CarsShop carShop = new CarsShop("CarShop", 1, "321234", "asd");
+        CarsShop carShop = new CarsShop("CarShop", 1, "321234", "someAddress");
         CarService carService = new CarService();
         CarReport carReport = new CarReport();
 
@@ -30,11 +30,8 @@ public class Main {
         List<Car> carsByModelExploitation = carService.findCarByModelAndExploitation(carShop, "x3", 2);
         List<Car> carsByYearAndPrice = carService.findCarByYearAndPrice(carShop, 2010, 4000.0);
 
-        carReport.printCarsByBrand(carShop, carsByBrand, "AUDI");
-        carReport.printCarsByYearAndPrice(carShop, carsByYearAndPrice, 2010, 4000.0);
-        carReport.printCarsByModelAndExploitation(carShop, carsByModelExploitation, "x3", 1);
-
-
-
+        carReport.printCarsByBrand(carShop, carsByBrand);
+        carReport.printCarsByYearAndPrice(carShop, carsByYearAndPrice);
+        carReport.printCarsByModelAndExploitation(carShop, carsByModelExploitation);
     }
 }

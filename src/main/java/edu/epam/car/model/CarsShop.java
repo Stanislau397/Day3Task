@@ -1,4 +1,5 @@
-package edu.epam.car.entity;
+package edu.epam.car.model;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -61,6 +62,8 @@ public class CarsShop {
     public void setCarList(List<Car> carList) {
         this.carList = carList;
     }
+
+
 
     @Override
     public String toString() {

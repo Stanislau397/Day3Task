@@ -1,7 +1,7 @@
 package edu.epam.car.service;
 
-import edu.epam.car.entity.Car;
-import edu.epam.car.entity.CarsShop;
+import edu.epam.car.model.Car;
+import edu.epam.car.model.CarsShop;
 import edu.epam.car.model.Brand;
 
 import java.util.List;
@@ -17,19 +17,21 @@ public class CarService {
                 .collect(Collectors.toList());
     }
 
-    public List<Car> findCarByModelAndExploitation(CarsShop carShop, String carModel, int carExploitation) {
+    public List<Car> findCarByModelAndExploitation(CarsShop carShop, String carModel, int carOperation) {
         List<Car> carsByModelOperationList = carShop.getCarList();
 
         return carsByModelOperationList.stream()
                 .filter(model -> model.getModel().equals(carModel))
-                .filter(exploitation -> exploitation.getExploitation() > carExploitation)
+                .filter(exploitation -> exploitation.getExploitation() > carOperation)
                 .collect(Collectors.toList());
     }
 
-    public List<Car> findCarByYearAndPrice(CarsShop carShop, int year, double price) {
+    public List<Car> findCarByYearAndPrice(CarsShop carShop, int carReleaseYear, double carPrice) {
         List<Car> carsByYearAndPriceList = carShop.getCarList();
 
-        return carsByYearAndPriceList.stream().filter(result -> result.getRealiseYear() == year
-                && result.getPrice() > price).collect(Collectors.toList());
+        return carsByYearAndPriceList.stream()
+                .filter(year -> year.getRealiseYear() == carReleaseYear)
+                .filter(price -> price.getPrice() > carPrice)
+                .collect(Collectors.toList());
     }
 }

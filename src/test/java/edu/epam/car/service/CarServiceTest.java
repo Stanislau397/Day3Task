@@ -1,7 +1,7 @@
 package edu.epam.car.service;
 
-import edu.epam.car.entity.Car;
-import edu.epam.car.entity.CarsShop;
+import edu.epam.car.model.Car;
+import edu.epam.car.model.CarsShop;
 import edu.epam.car.model.Brand;
 import org.testng.annotations.*;
 
@@ -53,6 +53,4 @@ public class CarServiceTest {
 
         assertEquals(result, expResult);
     }
-
-
 }

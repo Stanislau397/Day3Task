@@ -1,6 +1,4 @@
-package edu.epam.car.entity;
-
-import edu.epam.car.model.Brand;
+package edu.epam.car.model;
 
 public class Car {
     private Brand brand;
