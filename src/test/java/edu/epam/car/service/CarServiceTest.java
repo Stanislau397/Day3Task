@@ -12,22 +12,23 @@ import static org.testng.Assert.*;
 
 public class CarServiceTest {
 
+    CarsShop carsShop;
     CarService carService;
-    Car honda;
 
     @BeforeTest
     public void setUp() {
         this.carService = new CarService();
-        this.honda = new Car(Brand.HONDA, 5000.0, 4, 2010, "Civic");
+        this.carsShop = new CarsShop("CarShop", 1, "33333", "some");
     }
 
     @Test
     public void testFindCarByBrand() {
-        CarsShop carsShop = new CarsShop("cars", 2, "3334433", "somAddress");
+        Car honda = new Car(Brand.HONDA, 5000.0, 4, 2010, "Civic");
+        Car mazda = new Car(Brand.MAZDA, 3000.0, 5, 2011, "6");
         carsShop.addCar(honda);
 
         List<Car> expResult = new ArrayList<>();
-        expResult.add(honda);
+        expResult.add(mazda);
 
         List<Car> result = carService.findCarByBrand(carsShop, Brand.valueOf("HONDA"));
 
@@ -36,7 +37,8 @@ public class CarServiceTest {
 
     @Test
     public void testFindCarByModelAndExploitation() {
-        CarsShop carsShop = new CarsShop("cars", 2, "3334433", "somAddress");
+        Car honda = new Car(Brand.HONDA, 5000.0, 4, 2010, "Civic");
+        Car mazda = new Car(Brand.MAZDA, 3000.0, 5, 2011, "6");
         carsShop.addCar(honda);
 
         List<Car> expResult = new ArrayList<>();
@@ -49,7 +51,8 @@ public class CarServiceTest {
 
     @Test
     public void testFindCarByYearAndPrice() {
-        CarsShop carsShop = new CarsShop("cars", 2, "3334433", "somAddress");
+        Car honda = new Car(Brand.HONDA, 5000.0, 4, 2010, "Civic");
+        Car mazda = new Car(Brand.MAZDA, 3000.0, 5, 2011, "6");
         carsShop.addCar(honda);
 
         List<Car> result = carService.findCarByYearAndPrice(carsShop, 2010, 1000.0);
@@ -63,7 +66,7 @@ public class CarServiceTest {
     @AfterTest
     public void tierDown() {
         this.carService = null;
-        this.honda = null;
+        this.carsShop = null;
     }
 
 }
