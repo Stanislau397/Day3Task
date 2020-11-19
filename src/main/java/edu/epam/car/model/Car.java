@@ -10,7 +10,6 @@ public class Car {
     private String color;
     private String registrationNumber;
 
-
     public Car(Brand brand, int id, double price, int realiseYear, String model,
                String color, String registrationNumber) {
         this.brand = brand;
@@ -102,7 +101,6 @@ public class Car {
     public void setRegistrationNumber(String registrationNumber) {
         this.registrationNumber = registrationNumber;
     }
-
 
     @Override
     public boolean equals(Object obj) {
