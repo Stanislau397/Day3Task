@@ -2,18 +2,18 @@ package edu.epam.car.model;
 
 public class Car {
     private Brand brand;
-    private int id;
+    private Color color;
+    private long carId;
     private double price;
     private int realiseYear;
     private int exploitation;
     private String model;
-    private String color;
     private String registrationNumber;
 
-    public Car(Brand brand, int id, double price, int realiseYear, String model,
-               String color, String registrationNumber) {
+    public Car(Brand brand, long carId, double price, int realiseYear, String model,
+               Color color, String registrationNumber) {
         this.brand = brand;
-        this.id = id;
+        this.carId = carId;
         this.price = price;
         this.realiseYear = realiseYear;
         this.model = model;
@@ -21,7 +21,7 @@ public class Car {
         this.registrationNumber = registrationNumber;
     }
 
-    public Car(Brand brand, double price, int realiseYear, int exploitation, String model, String color) {
+    public Car(Brand brand, double price, int realiseYear, int exploitation, String model, Color color) {
         this.brand = brand;
         this.price = price;
         this.realiseYear = realiseYear;
@@ -46,12 +46,12 @@ public class Car {
         this.brand = brand;
     }
 
-    public int getId() {
-        return id;
+    public long getId() {
+        return carId;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setId(int carId) {
+        this.carId = carId;
     }
 
     public double getPrice() {
@@ -86,11 +86,11 @@ public class Car {
         this.model = model;
     }
 
-    public String getColor() {
+    public Color getColor() {
         return color;
     }
 
-    public void setColor(String color) {
+    public void setColor(Color color) {
         this.color = color;
     }
 
@@ -103,62 +103,36 @@ public class Car {
     }
 
     @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (null == obj) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Car)) return false;
 
-        Car car = (Car) obj;
-        if (null == brand) {
-            return (brand.equals(car.brand));
-        } else {
-            if (!brand.equals(car.brand)) {
-                return false;
-            }
-            if (id != car.id || price != car.price
-                    || realiseYear != car.realiseYear
-                    || exploitation != car.exploitation) {
-                return false;
-            }
-            if (null == model) {
-                return (model.equals(car.model));
-            } else {
-                if (!model.equals(car.model)) {
-                    return false;
-                }
-                if (null == color) {
-                    return (color.equals(car.color));
-                } else {
-                    if (!color.equals(car.color)) {
-                        return false;
-                    }
-                    if (null == registrationNumber) {
-                        return (registrationNumber.equals(car.registrationNumber));
-                    } else {
-                        if (!registrationNumber.equals(car.registrationNumber)) {
-                            return false;
-                        }
-                    }
-                }
-            }
-        }
-        return true;
+        Car car = (Car) o;
+
+        if (carId != car.carId) return false;
+        if (Double.compare(car.price, price) != 0) return false;
+        if (realiseYear != car.realiseYear) return false;
+        if (exploitation != car.exploitation) return false;
+        if (brand != car.brand) return false;
+        if (color != car.color) return false;
+        if (model != null ? !model.equals(car.model) : car.model != null) return false;
+        return registrationNumber != null ? registrationNumber.equals(car.registrationNumber) : car.registrationNumber == null;
     }
 
     @Override
     public int hashCode() {
-        int hash = 31;
-        return (int) (hash * price * id * exploitation +
-                ((null == registrationNumber) ? 0 : registrationNumber.hashCode()) +
-                ((null == brand) ? 0 : brand.hashCode()) +
-                ((null == model) ? 0 : model.hashCode()) +
-                ((null == color) ? 0 : color.hashCode()));
+        int result;
+        long temp;
+        result = brand != null ? brand.hashCode() : 0;
+        result = 31 * result + (color != null ? color.hashCode() : 0);
+        result = 31 * result + (int) (carId ^ (carId >>> 32));
+        temp = Double.doubleToLongBits(price);
+        result = 31 * result + (int) (temp ^ (temp >>> 32));
+        result = 31 * result + realiseYear;
+        result = 31 * result + exploitation;
+        result = 31 * result + (model != null ? model.hashCode() : 0);
+        result = 31 * result + (registrationNumber != null ? registrationNumber.hashCode() : 0);
+        return result;
     }
 
     @Override

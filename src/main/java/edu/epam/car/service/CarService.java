@@ -1,7 +1,7 @@
 package edu.epam.car.service;
 
 import edu.epam.car.model.Car;
-import edu.epam.car.model.CarsShop;
+import edu.epam.car.model.CarShop;
 import edu.epam.car.model.Brand;
 
 import java.util.List;
@@ -9,7 +9,7 @@ import java.util.stream.Collectors;
 
 public class CarService {
 
-    public List<Car> findCarByBrand(CarsShop carShop, Brand carBrand) {
+    public List<Car> findCarByBrand(CarShop carShop, Brand carBrand) {
         List<Car> carsByBrandList = carShop.getCarList();
 
         return carsByBrandList.stream()
@@ -17,7 +17,7 @@ public class CarService {
                 .collect(Collectors.toList());
     }
 
-    public List<Car> findCarByModelAndExploitation(CarsShop carShop, String carModel, int carOperation) {
+    public List<Car> findCarByModelAndExploitation(CarShop carShop, String carModel, int carOperation) {
         List<Car> carsByModelOperationList = carShop.getCarList();
 
         return carsByModelOperationList.stream()
@@ -26,7 +26,7 @@ public class CarService {
                 .collect(Collectors.toList());
     }
 
-    public List<Car> findCarByYearAndPrice(CarsShop carShop, int carReleaseYear, double carPrice) {
+    public List<Car> findCarByYearAndPrice(CarShop carShop, int carReleaseYear, double carPrice) {
         List<Car> carsByYearAndPriceList = carShop.getCarList();
 
         return carsByYearAndPriceList.stream()
